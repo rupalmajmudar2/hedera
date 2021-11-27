@@ -11,7 +11,7 @@ import com.hedera.hashgraph.sdk.AccountCreateTransaction;
 import com.hedera.hashgraph.sdk.Hbar;
 import com.hedera.hashgraph.sdk.AccountBalanceQuery;
 import com.hedera.hashgraph.sdk.AccountBalance;
-import io.github.cdimascio.dotenv.Dotenv;
+//import io.github.cdimascio.dotenv.Dotenv;
 
 import java.util.concurrent.TimeoutException;
 
@@ -20,8 +20,8 @@ public class HederaExamples {
     public static void main(String[] args) throws TimeoutException, HederaPreCheckStatusException, Exception {
 
         //Grab your Hedera testnet account ID and private key
-        AccountId myAccountId = AccountId.fromString(Dotenv.load().get("MY_ACCOUNT_ID"));
-        PrivateKey myPrivateKey = PrivateKey.fromString(Dotenv.load().get("MY_PRIVATE_KEY"));
+        AccountId myAccountId = AccountId.fromString("0.0.15656129"); //temp Dotenv.load().get("MY_ACCOUNT_ID"));
+        PrivateKey myPrivateKey = PrivateKey.fromString("302e020100300506032b6570042204202bdec14e0d6f5de6b4b066c563534bf049e1d3d340dbd87e25044f261d54d753"); //temp Dotenv.load().get("MY_PRIVATE_KEY"));
 
         //Create your Hedera testnet client
         Client client = Client.forTestnet();
