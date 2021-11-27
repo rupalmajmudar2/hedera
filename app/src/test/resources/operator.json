@@ -1,9 +1,0 @@
-{
-    "network": {
-        "0.testnet.hedera.com:50211": "0.0.3"
-    },
-    "operator": {
-        "accountId": "0.0.15656129",
-        "privateKey": "302e020100300506032b6570042204202bdec14e0d6f5de6b4b066c563534bf049e1d3d340dbd87e25044f261d54d753"
-    }
-}

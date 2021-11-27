@@ -1,0 +1,28 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'hedera.HederaExamples' //'hello.HelloWorld'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    //implementation "joda-time:joda-time:2.2"
+    testImplementation "junit:junit:4.12"
+    // This dependency is used by the application.
+    //implementation("com.google.guava:guava:30.1.1-jre")
+    // Android, Corda DJVM, Java 7+
+    implementation "com.hedera.hashgraph:sdk-jdk7:2.0.4"
+    implementation "io.grpc:grpc-netty-shaded:1.35.0"
+    implementation "org.slf4j:slf4j-simple:1.7.29"
+    compile "io.github.cdimascio:java-dotenv:5.2.1"
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+jar {
+    archiveBaseName = 'rm-gradle'
+    archiveVersion =  '0.1.0'
+}

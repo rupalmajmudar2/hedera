@@ -3,7 +3,3 @@
 
 # Ignore Gradle build output directory
 build
-app/bin/main/RmHederaSetup/App.class
-app/bin/test/RmHederaSetup/AppTest.class
-app/src/main/java/RmHederaSetup/App.class
-app/bin/main/RmHederaSetup/RmHederaExamples.class
