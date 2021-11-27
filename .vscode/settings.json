@@ -1,0 +1,6 @@
+{
+    "java.project.sourcePaths": ["src"],
+    "java.project.outputPath": "bin",
+    "vscode-corda.isCordaProject": false,
+    "java.configuration.updateBuildConfiguration": "automatic"
+}
