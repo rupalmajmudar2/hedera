@@ -11,17 +11,18 @@ import com.hedera.hashgraph.sdk.AccountCreateTransaction;
 import com.hedera.hashgraph.sdk.Hbar;
 import com.hedera.hashgraph.sdk.AccountBalanceQuery;
 import com.hedera.hashgraph.sdk.AccountBalance;
-//import io.github.cdimascio.dotenv.Dotenv;
+import com.hedera.hashgraph.sdk.TransferTransaction;
+import io.github.cdimascio.dotenv.Dotenv;
 
 import java.util.concurrent.TimeoutException;
 
 public class HederaExamples {
 
-    public static void main(String[] args) throws TimeoutException, HederaPreCheckStatusException, Exception {
+    public static void main(String[] args) throws TimeoutException, HederaPreCheckStatusException, HederaReceiptStatusException, Exception {
 
         //Grab your Hedera testnet account ID and private key
-        AccountId myAccountId = AccountId.fromString("0.0.15656129"); //temp Dotenv.load().get("MY_ACCOUNT_ID"));
-        PrivateKey myPrivateKey = PrivateKey.fromString("302e020100300506032b6570042204202bdec14e0d6f5de6b4b066c563534bf049e1d3d340dbd87e25044f261d54d753"); //temp Dotenv.load().get("MY_PRIVATE_KEY"));
+        AccountId myAccountId = AccountId.fromString(Dotenv.load().get("MY_ACCOUNT_ID"));
+        PrivateKey myPrivateKey = PrivateKey.fromString(Dotenv.load().get("MY_PRIVATE_KEY"));
 
         //Create your Hedera testnet client
         Client client = Client.forTestnet();
@@ -48,6 +49,28 @@ public class HederaExamples {
                 .execute(client);
 
         System.out.println("The new account balance is: " +accountBalance.hbars);
+
+        //Transfer hbar
+        TransactionResponse sendHbar = new TransferTransaction()
+                .addHbarTransfer(myAccountId, Hbar.fromTinybars(-1000))
+                .addHbarTransfer(newAccountId, Hbar.fromTinybars(1000))
+                .execute(client);
+
+        System.out.println("The transfer transaction was: " +sendHbar.getReceipt(client).status);
+
+        //Request the cost of the query
+        Hbar queryCost = new AccountBalanceQuery()
+                .setAccountId(newAccountId)
+                .getCost(client);
+
+        System.out.println("The cost of this query is: " +queryCost);
+
+        //Check the new account's balance
+        AccountBalance accountBalanceNew = new AccountBalanceQuery()
+                .setAccountId(newAccountId)
+                .execute(client);
+
+        System.out.println("The new account balance is: " +accountBalanceNew.hbars);
 
     }
 }
